@@ -145,6 +145,15 @@ langgraph.json           # LangGraph Studio config
 
 - [ ] Core agent flow over local `.txt` files
 - [ ] Kol Zchut fetcher (download and clean pages into `data/raw/`)
+  - [ ] Check Kol Zchut terms of use / API access before automated downloads
+  - [ ] Only workers'-rights categories, not the whole site
+  - [ ] Store each page's MediaWiki revision id; re-fetch only pages that changed
+  - [ ] Keep hand-written samples (`data/samples/`, committed) separate from fetched pages (`data/fetched/`, git-ignored)
+- [ ] Incremental ingest instead of full rebuild
+  - [ ] Chunk ids based on page URL instead of file name
+  - [ ] `content_hash` per page in chunk metadata; skip unchanged pages
+  - [ ] Changed page → delete all its chunks, then re-add (fixes stale chunks when a page gets shorter)
+  - [ ] Deleted page → delete its chunks
 - [ ] Evaluation set of realistic questions to measure answer quality
 - [ ] Web UI / API
 - [ ] Persistent conversation storage (replace in-memory checkpointer)

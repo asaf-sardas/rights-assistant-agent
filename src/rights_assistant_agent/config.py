@@ -10,6 +10,7 @@ from configuration and easy to test.
 
 from functools import lru_cache
 from pathlib import Path
+from typing import Literal
 
 from pydantic import Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -40,6 +41,9 @@ class Settings(BaseSettings):
     data_dir: Path = PROJECT_ROOT / "data" / "raw"
     chroma_dir: Path = PROJECT_ROOT / ".chroma"
     chroma_collection: str = "kolzchut"
+    # OpenAI embeddings are compared by cosine similarity. Applied when the
+    # collection is created: re-run ingest after changing it.
+    distance_metric: Literal["cosine", "l2", "ip"] = "cosine"
 
     # --- Retrieval ---
     chunk_size: int = Field(default=1000, gt=0)  # characters per chunk
